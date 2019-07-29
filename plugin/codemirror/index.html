@@ -9,6 +9,13 @@
 print("HI")
 #hi
             </textarea>
+           <button style="width:90%" id="run" class="btn btn-primary">Run</button>
+          <div class="console">
+<p class="pconsole">/**
+  </p>
+   <p class="pconsole indent"> Output will go here.</p>
+<p class="pconsole indent"> /</p>
+</div>
         </form>
 
         <script>
@@ -23,6 +30,19 @@ print("HI")
                     gutters: ["CodeMirror-linenumbers", "CodeMirror-foldgutter"]
                 });
             };
+
+           $("#run").click(function(){
+            $( "#chalfunction" ).remove();
+            var jsx = js.getValue();
+            var s = document.createElement('script');
+            s.setAttribute("id", "chalfunction");
+            s.textContent = jsx;//inne
+            document.body.appendChild(s);
+            $( ".pconsole" ).remove();
+            $(".console").append("<p class='pconsole indent'>" + challengeFunction() +" </p>");
+
+            });
+
         </script>
     </body>
 </html>
