@@ -63,7 +63,7 @@ function builtinRead(x) {
         function runit(prog) {
            var mypre = document.getElementById("output");
            mypre.innerHTML = '';
-           Sk.python3 = true
+           Sk.python3 = true;
            Sk.pre = "output";
 
            Sk.configure({output:outf, read:builtinRead});
