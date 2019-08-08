@@ -16,8 +16,8 @@
     <body>
         <form id="python_code" style="width:500px;" onsubmit="return false">
               <textarea id="code" name="code">
-print("HIYA")
-#hi
+print("test")
+#testing
 </textarea>
             <input type="submit" name="form-submit" id="form-submit" value="Run Code" onclick="myFunction()">
 
@@ -43,7 +43,6 @@ function builtinRead(x) {
     return Sk.builtinFiles["files"][x];
 }
             window.onload = function() {
-              console.log("ONLOAD")
               window.editor = CodeMirror.fromTextArea(code, {
                 mode: "text/x-cython",
                 lineNumbers: true,
