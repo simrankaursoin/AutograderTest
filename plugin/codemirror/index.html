@@ -9,10 +9,9 @@
   <script src="http://www.skulpt.org/js/skulpt-stdlib.js" type="text/javascript"></script>
 </head>
 
-
 <body>
 <form id="python_code" style="width:500px;" onsubmit="return false">
-              <textarea id="code" name="code">
+<textarea id="code" name="code">
 '''
 You receive a Python list containing an unknown number of floating point numbers.  Each number represents the centimeters of rain recorded on a given day.  Valid rain numbers are positive or zero.  By accident, after the rainfall data, the list also contains some other data which you need to ignore.  This other data starts with a negative number.
 
@@ -63,9 +62,9 @@ def get_avg_rainfall(rainfall):
         };
 
         function gradeCode(e) {
-           var value = editor.getValue();
-           value += "\n";
-           gradeit(value)
+           var original_answer = editor.getValue();
+           original_answer += "\n";
+           gradeit(original_answer)
         };
 
         function gradeit(value) {
@@ -81,7 +80,7 @@ def get_avg_rainfall(rainfall):
             document.getElementById("output").value = ">>>>Autograder Results: All tests passed"
               }
           else{
-               document.getElementById("output").value = ">>>>Autograder Results: Test failed "
+               document.getElementById("output").value = ">>>>Autograder Results: At least one test failed "
               }
         };
 
