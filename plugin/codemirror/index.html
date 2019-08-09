@@ -1,47 +1,49 @@
 <head>
   <link rel="stylesheet" href="lib/codemirror.css">
-        <script src="lib/codemirror.js"></script>
-        <script src="mode/python/python.js"></script>
-        <script src="addon/runmode/runmode.js"></script>
-        <script src="addon/fold/foldcode.js"></script>
+  <script src="lib/codemirror.js"></script>
+  <script src="mode/python/python.js"></script>
+  <script src="addon/runmode/runmode.js"></script>
+  <script src="addon/fold/foldcode.js"></script>
   <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js" type="text/javascript"></script>
-<script src="http://www.skulpt.org/js/skulpt.min.js" type="text/javascript"></script>
-<script src="http://www.skulpt.org/js/skulpt-stdlib.js" type="text/javascript"></script>
-
+  <script src="http://www.skulpt.org/js/skulpt.min.js" type="text/javascript"></script>
+  <script src="http://www.skulpt.org/js/skulpt-stdlib.js" type="text/javascript"></script>
 </head>
 
 
-
-
-    <body>
-        <form id="python_code" style="width:500px;" onsubmit="return false">
+<body>
+<form id="python_code" style="width:500px;" onsubmit="return false">
               <textarea id="code" name="code">
-print("test")
-#testing
+'''
+You receive a Python list containing an unknown number of floating point numbers.  Each number represents the centimeters of rain recorded on a given day.  Valid rain numbers are positive or zero.  By accident, after the rainfall data, the list also contains some other data which you need to ignore.  This other data starts with a negative number.
+
+Write a Python function which takes the variable called rainfall as an input and returns the average rainfall as output.  Make sure your function averages valid rainfall numbers only.
+
+Please name your function get_avg_rainfall and take out any print statements or code that calls your function before you submit for grading.
+'''
+
+def get_avg_rainfall(rainfall):
 </textarea>
-            <input type="submit" name="form-submit" id="form-submit" value="Run Code" onclick="myFunction()">
+          <input type="submit" name="form-submit" id="form-submit" value="Run Code" onclick="processCode()">
+          <input type="submit" name="form-submit" id="form-submit" value="Grade Code" onclick="gradeCode()">
+</form>
 
-        </form>
+<textarea id="output" cols="100" rows="10" name="code" style="font-family:courier;"></textarea>
 
+<script>
+  window.testlines = ["\nprint(get_avg_rainfall([1.0, 3.5, 7.9, 4.0, -2.0, 3.4, 5.6, 6.4]))"];
+  window.answer = [4.1];
+</script>
+<script type="text/javascript">
 
-
-
-
-        <textarea id="output" cols="100" rows="10" name="code" style="font-family:courier;"></textarea>
-
-
-        <script type="text/javascript">
-// output functions are configurable.  This one just appends some text
-// to a pre element.
-function outf(text) {
-    var mypre = document.getElementById("output");
-    mypre.innerHTML = mypre.innerHTML + text;
-}
-function builtinRead(x) {
-    if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
-            throw "File not found: '" + x + "'";
-    return Sk.builtinFiles["files"][x];
-}
+        function outf(text) {
+            var mypre = document.getElementById("output");
+            mypre.innerHTML = mypre.innerHTML + text;
+        }
+        function builtinRead(x) {
+            if (Sk.builtinFiles === undefined || Sk.builtinFiles["files"][x] === undefined)
+                    throw "File not found: '" + x + "'";
+            return Sk.builtinFiles["files"][x];
+            }
             window.onload = function() {
               window.editor = CodeMirror.fromTextArea(code, {
                 mode: "text/x-cython",
@@ -54,11 +56,34 @@ function builtinRead(x) {
               });
             };
 
-            function myFunction(e) {
-              var value = editor.getValue();
-              console.log(value);
-              runit(value);
-            };
+        function processCode(e) {
+           var value = editor.getValue();
+           console.log(value);
+           runit(value);
+        };
+
+        function gradeCode(e) {
+           var value = editor.getValue();
+           value += "\n";
+           gradeit(value)
+        };
+
+        function gradeit(value) {
+          var all_tests_passed = true;
+          for (i=0; i< window.testlines.length; i++) {
+            var testvalue = value + window.testlines[i];
+            runit(testvalue, window.answer[i]);
+            if (document.getElementById("output").value != window.answer[i]) {
+              all_tests_passed = false;
+            }
+          }
+          if(all_tests_passed){
+            document.getElementById("output").value = ">>>>Autograder Results: All tests passed"
+              }
+          else{
+               document.getElementById("output").value = ">>>>Autograder Results: Test failed "
+              }
+        };
 
         function runit(prog) {
            var mypre = document.getElementById("output");
@@ -74,9 +99,9 @@ function builtinRead(x) {
                console.log('success');
            },
                function(err) {
-               alert(err.toString());
-           });
+                   alert(err.toString());
+               });
         }
 </script>
-    </body>
+</body>
 </html>
