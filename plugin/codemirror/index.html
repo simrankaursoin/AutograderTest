@@ -23,7 +23,8 @@ Please name your function get_avg_rainfall and take out any print statements or 
 def get_avg_rainfall(rainfall):
 </textarea>
           <input type="submit" name="form-submit" id="form-submit" value="Run Code" onclick="processCode()">
-          <input type="submit" name="form-submit" id="form-submit" value="Grade Code" onclick="gradeCode()">
+          <input type="submit" name="form-submit" id="form-submit" value="Run Autograder" onclick="gradeCode()">
+          <input type="submit" name="form-submit" id="form-submit" value="Submit for Testing" onclick="submitCode()">
 </form>
 
 <textarea id="output" cols="100" rows="10" name="code" style="font-family:courier;"></textarea>
@@ -32,6 +33,7 @@ def get_avg_rainfall(rainfall):
   window.testlines = ["\nprint(get_avg_rainfall([1.0, 3.5, 7.9, 4.0, -2.0, 3.4, 5.6, 6.4]))"];
   window.answer = [4.1];
 </script>
+
 <script type="text/javascript">
 
         function outf(text) {
@@ -48,6 +50,7 @@ def get_avg_rainfall(rainfall):
                 mode: "text/x-cython",
                 lineNumbers: true,
                 lineWrapping: true,
+                indentUnit:4,
                 foldGutter: {
                   rangeFinder: new CodeMirror.fold.combine(CodeMirror.fold.brace, CodeMirror.fold.comment)
                 },
@@ -90,7 +93,7 @@ def get_avg_rainfall(rainfall):
            Sk.python3 = true;
            Sk.pre = "output";
 
-           Sk.configure({output:outf, read:builtinRead});
+           Sk.configure({output:outf, read:builtinRead, execLimit:500});
            var myPromise = Sk.misceval.asyncToPromise(function() {
                return Sk.importMainWithBody("<stdin>", false, prog, true);
            });
@@ -100,6 +103,17 @@ def get_avg_rainfall(rainfall):
                function(err) {
                    alert(err.toString());
                });
+        }
+
+        function submitCode(e) {
+          if (confirm("Are you sure you want to submit the form?")) {
+              var original_answer = editor.getValue();
+              original_answer += "\n";
+              gradeit(original_answer);
+          }
+          else {
+            alert("You decided to not submit the form!");
+          }
         }
 </script>
 </body>
