@@ -30,7 +30,9 @@ def get_avg_rainfall(rainfall):
 <textarea id="output" cols="100" rows="10" name="code" style="font-family:courier;"></textarea>
 
 <script>
-  window.testcases = [["\nprint(get_avg_rainfall([1.0, 3.5, 7.9, 4.0, -2.0, 3.4, 5.6, 6.4]))",4.1]];
+  window.testcases = [
+    ["print(get_avg_rainfall([1.0, 3.5, 7.9, 4.0, -2.0, 3.4, 5.6, 6.4]))",4.1]
+  ];
 </script>
 
 <script type="text/javascript">
@@ -72,13 +74,8 @@ def get_avg_rainfall(rainfall):
         function gradeit(value) {
           var all_tests_passed = true;
           for (i=0; i< window.testcases.length; i++) {
-            var testvalue = value + window.testcases[i][0];
-            console.log("BEFORE");
-            console.log(document.getElementById("output").value);
+            var testvalue = value + "\n" + window.testcases[i][0];
             runit(testvalue);
-            console.log("AFTER");
-            console.log(document.getElementById("output").value);
-            console.log(window.testcases[i][1]);
             if (document.getElementById("output").value != window.testcases[i][1]) {
               all_tests_passed = false;
             }
