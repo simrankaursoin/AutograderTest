@@ -13,14 +13,10 @@
 <form id="python_code" style="width:500px;" onsubmit="return false">
 <textarea id="code" name="code">
 '''
-You receive a Python list containing an unknown number of floating point numbers.  Each number represents the centimeters of rain recorded on a given day.  Valid rain numbers are positive or zero.  By accident, after the rainfall data, the list also contains some other data which you need to ignore.  This other data starts with a negative number.
-
-Write a Python function which takes the variable called rainfall as an input and returns the average rainfall as output.  Make sure your function averages valid rainfall numbers only.
-
-Please name your function get_avg_rainfall and take out any print statements or code that calls your function before you submit for grading.
+Question prompt
 '''
 
-def get_avg_rainfall(rainfall):
+def testfunction(x):
 </textarea>
           <input type="submit" name="form-submit" id="form-submit" value="Run Code" onclick="processCode()">
           <input type="submit" name="form-submit" id="form-submit" value="Run Autograder" onclick="gradeCode()">
@@ -31,7 +27,7 @@ def get_avg_rainfall(rainfall):
 
 <script>
   window.testcases = [
-    ["print(get_avg_rainfall([1.0, 3.5, 7.9, 4.0, -2.0, 3.4, 5.6, 6.4]))",4.1]
+    ["print('hello world')", "hello world"]
   ];
 </script>
 
